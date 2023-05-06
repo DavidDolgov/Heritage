@@ -7,12 +7,12 @@ import org.junit.jupiter.api.Test;
 public class ProductRepositoryAndManagerTests {
 
     Product product1 = new Book(1, "Book 1", 100, "Author 1");
-    Product product2 = new Book(2, "Book 2", 200, "Author 2");
+    Product product2 = new Book(2, "Book 2", 200, "Author 22");
     Product product3 = new Book(3, "Book 3", 300, "Author 3");
     Product product4 = new Book(4, "Book 4", 400, "Author 4");
     Product product5 = new Book(5, "Book 5", 500, "Author 5");
     Product product6 = new Smartphone(6, "Smartphone 1", 10_000, "manufacturer 1");
-    Product product7 = new Smartphone(7, "Smartphone 2", 20_000, "manufacturer 2");
+    Product product7 = new Smartphone(7, "Smartphone 2", 20_000, "manufacturer 22");
     Product product8 = new Smartphone(8, "Smartphone 3", 30_000, "manufacturer 3");
     Product product9 = new Smartphone(9, "Smartphone 4", 40_000, "manufacturer 4");
     Product product10 = new Smartphone(10, "Smartphone 5", 50_000, "manufacturer 5");
@@ -57,45 +57,68 @@ public class ProductRepositoryAndManagerTests {
     }
 
     @Test
-    public void shouldManagerSearchByText() {
+    public void shouldManagerSearchByText1() {
         String text1 = "Book 1";
-        String text2 = "Smartphone 1";
-        String text3 = "1";
-        String text4 = "Book";
-        String text5 = "Smartphone";
-        String text6 = "";
-        String text7 = " ";
-
 
         Product[] expected1 = {product1};
         Product[] actual1 = manager.searchBy(text1);
 
         Assertions.assertArrayEquals(expected1, actual1);
+    }
+
+    @Test
+    public void shouldManagerSearchByText2() {
+        String text2 = "Smartphone 1";
 
         Product[] expected2 = {product6};
         Product[] actual2 = manager.searchBy(text2);
 
         Assertions.assertArrayEquals(expected2, actual2);
+    }
+
+    @Test
+    public void shouldManagerSearchByText3() {
+        String text3 = "1";
 
         Product[] expected3 = {product1, product6};
         Product[] actual3 = manager.searchBy(text3);
 
         Assertions.assertArrayEquals(expected3, actual3);
+    }
+
+    @Test
+    public void shouldManagerSearchByText4() {
+        String text4 = "Book";
 
         Product[] expected4 = {product1, product2, product3, product4, product5};
         Product[] actual4 = manager.searchBy(text4);
 
         Assertions.assertArrayEquals(expected4, actual4);
+    }
+
+    @Test
+    public void shouldManagerSearchByText5() {
+        String text5 = "Smartphone";
 
         Product[] expected5 = {product6, product7, product8, product9, product10};
         Product[] actual5 = manager.searchBy(text5);
 
         Assertions.assertArrayEquals(expected5, actual5);
+    }
+
+    @Test
+    public void shouldManagerSearchByText6() {
+        String text6 = "";
 
         Product[] expected6 = {product1, product2, product3, product4, product5, product6, product7, product8, product9, product10};
         Product[] actual6 = manager.searchBy(text6);
 
         Assertions.assertArrayEquals(expected6, actual6);
+    }
+
+    @Test
+    public void shouldManagerSearchByText7() {
+        String text7 = " ";
 
         Product[] expected7 = {product1, product2, product3, product4, product5, product6, product7, product8, product9, product10};
         Product[] actual7 = manager.searchBy(text7);
@@ -104,18 +127,74 @@ public class ProductRepositoryAndManagerTests {
     }
 
     @Test
-    public void shouldNotManagerSearchByText() {
+    public void shouldNotManagerSearchByText1() {
         String text1 = "Book Smartphone";
-        String text2 = "Book 1 Book 2";
+
 
         Product[] expected1 = {};
         Product[] actual1 = manager.searchBy(text1);
 
         Assertions.assertArrayEquals(expected1, actual1);
+    }
+
+    @Test
+    public void shouldNotManagerSearchByText2() {
+        String text2 = "Book 1 Book 2";
 
         Product[] expected2 = {};
         Product[] actual2 = manager.searchBy(text2);
 
         Assertions.assertArrayEquals(expected2, actual2);
+    }
+
+    @Test
+    public void shouldManagerSearchByText1AuthorOrManufacturer() {
+        String text1 = "Author 1";
+
+        Product[] expected1 = {product1};
+        Product[] actual1 = manager.searchBy(text1);
+
+        Assertions.assertArrayEquals(expected1, actual1);
+    }
+
+    @Test
+    public void shouldManagerSearchByText2AuthorOrManufacturer() {
+        String text2 = "manufacturer 1";
+
+        Product[] expected2 = {product6};
+        Product[] actual2 = manager.searchBy(text2);
+
+        Assertions.assertArrayEquals(expected2, actual2);
+    }
+
+    @Test
+    public void shouldManagerSearchByText3AuthorOrManufacturer() {
+        String text3 = "22";
+
+        Product[] expected3 = {product2, product7};
+        Product[] actual3 = manager.searchBy(text3);
+
+        Assertions.assertArrayEquals(expected3, actual3);
+    }
+
+    @Test
+    public void shouldManagerSearchByText4AuthorOrManufacturer() {
+        String text4 = "Author";
+
+        Product[] expected4 = {product1, product2, product3, product4, product5};
+        Product[] actual4 = manager.searchBy(text4);
+
+        Assertions.assertArrayEquals(expected4, actual4);
+    }
+
+    @Test
+    public void shouldManagerSearchByText5AuthorOrManufacturer() {
+        String text5 = "manufacturer";
+
+        Product[] expected5 = {product6, product7, product8, product9, product10};
+        Product[] actual5 = manager.searchBy(text5);
+
+        Assertions.assertArrayEquals(expected5, actual5);
+
     }
 }

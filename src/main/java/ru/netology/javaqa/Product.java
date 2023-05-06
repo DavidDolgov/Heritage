@@ -18,4 +18,9 @@ public class Product {
     public String getName() {
         return name;
     }
+
+    // метод определения соответствия товара product запросу search
+    public boolean matches(Product product, String search) {
+        return getName().contains(search);     // Возвращает true или false
+    }
 }
